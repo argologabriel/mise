@@ -10,10 +10,10 @@ namespace Mise.API.Controllers;
 public class UserController : ControllerBase
 {
     [HttpPost]
-    [ProducesResponseType(typeof(ResponseRegisteredUser), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)]
     public async Task<IActionResult> Register(
         [FromServices]IRegisterUserUseCase useCase,
-        [FromBody]RequestRegisterUser request
+        [FromBody]RequestRegisterUserJson request
         )
     {
         var result = await useCase.Execute(request);

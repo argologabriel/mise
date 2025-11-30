@@ -14,7 +14,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 		_userWriteRepository = userWriteRepository;
 	} 
 
-	public async Task<ResponseRegisteredUser> Execute(RequestRegisterUser request)
+	public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
 	{
 		await Validate(request);
 
@@ -31,13 +31,13 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 
 		await _userWriteRepository.Add(user);
 
-		return new ResponseRegisteredUser
+		return new ResponseRegisteredUserJson
 		{
 			Name = user.Name,
 		};
 	}
 	
-	private async Task Validate(RequestRegisterUser request)
+	private async Task Validate(RequestRegisterUserJson request)
 	{
 		var validator = new RegisterUserValidator();
 

@@ -3,7 +3,7 @@ using Mise.Communication.Requests;
 
 namespace Mise.Application.UseCases.User.Register;
 
-public class RegisterUserValidator : AbstractValidator<RequestRegisterUser>
+public class RegisterUserValidator : AbstractValidator<RequestRegisterUserJson>
 {
 	public RegisterUserValidator()
 	{
