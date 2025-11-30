@@ -1,6 +1,7 @@
 using Mise.Communication.Requests;
 using Mise.Communication.Responses;
 using Mise.Domain.Repositories.User;
+using Mise.Exceptions.ExceptionsBase;
 
 namespace Mise.Application.UseCases.User.Register;
 
@@ -46,7 +47,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 		{
 			var errorMessages = result.Errors.Select(error => error.ErrorMessage).ToList();
 
-			throw new Exception();
+			throw new ValidationErrorException(errorMessages);
 		}
 	}
 }
