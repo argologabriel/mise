@@ -1,5 +1,5 @@
 using Mise.Application.Extensions;
-using Mise.Infrastructure;
+using Mise.Exceptions.ExceptionsBase;
 using Mise.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
