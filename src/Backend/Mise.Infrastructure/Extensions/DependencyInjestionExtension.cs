@@ -1,16 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Mise.Domain.Entities;
+using Mise.Domain.Repositories.User;
 using Mise.Infrastructure.DataAcess;
-using Mise.Infrastructure.Extensions;
+using Mise.Infrastructure.DataAcess.Repositories;
 
-namespace Mise.Infrastructure;
+namespace Mise.Infrastructure.Extensions;
 
 public static class DependencyInjectionExtension
 {
     public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
 		AddDbContext(services, configuration);
+        AddRepositories(services);
     }
 
 	private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
@@ -22,4 +25,9 @@ public static class DependencyInjectionExtension
             dbContextOptions.UseSqlServer(connectionString);
         });
     }
+
+    private static void AddRepositories(IServiceCollection services)
+	{
+		services.AddScoped<IUserWriteRepository, UserRepository>();
+	}
 }
