@@ -1,3 +1,4 @@
+using AutoMapper;
 using Mise.Communication.Requests;
 using Mise.Communication.Responses;
 using Mise.Domain.Repositories.User;
@@ -7,10 +8,12 @@ namespace Mise.Application.UseCases.User.Register;
 
 public class RegisterUserUseCase : IRegisterUserUseCase
 {
+	private readonly IMapper _mapper;
 	private readonly IUserWriteRepository _userWriteRepository;
 
-	public RegisterUserUseCase(IUserWriteRepository userWriteRepository)
+	public RegisterUserUseCase(IMapper mapper, IUserWriteRepository userWriteRepository)
 	{
+		_mapper = mapper;
 		_userWriteRepository = userWriteRepository;
 	} 
 
@@ -18,14 +21,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 	{
 		await Validate(request);
 
-		// TODO: Usar AutoMapper para Converter de DTO para Entidade 
-
-		var user = new Domain.Entities.User
-		{
-			Name = request.Name,
-			Email = request.Email,
-			Password = request.Password
-		};
+		var user = _mapper.Map<Domain.Entities.User>(request);
 
 		// TODO: Criptografar Senha 
 

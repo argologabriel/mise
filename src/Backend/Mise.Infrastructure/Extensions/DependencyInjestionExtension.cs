@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Mise.Domain.Entities;
 using Mise.Domain.Repositories.User;
 using Mise.Infrastructure.DataAcess;
 using Mise.Infrastructure.DataAcess.Repositories;
