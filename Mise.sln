@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mise.Infrastructure", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mise.Communication", "src\Shared\Mise.Communication\Mise.Communication.csproj", "{4891F7C9-B5B6-49B6-BAA3-03FE72EA900B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mise.Exception", "src\Shared\Mise.Exception\Mise.Exception.csproj", "{37C9F99C-0F79-42A5-AB65-FD977A20DB4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mise.Exceptions", "src\Shared\Mise.Exceptions\Mise.Exceptions.csproj", "{37C9F99C-0F79-42A5-AB65-FD977A20DB4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

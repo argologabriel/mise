@@ -8,11 +8,12 @@
 
   <ItemGroup>
     <ProjectReference Include="../../Shared/Mise.Communication/Mise.Communication.csproj" />
-    <ProjectReference Include="../../Shared/Mise.Exception/Mise.Exception.csproj" />
+    <ProjectReference Include="../../Shared/Mise.Exceptions/Mise.Exceptions.csproj" />
     <ProjectReference Include="../Mise.Domain/Mise.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="12.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
   </ItemGroup>
 

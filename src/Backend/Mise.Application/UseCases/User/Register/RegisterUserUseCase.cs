@@ -15,7 +15,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 
 	public async Task<ResponseRegisteredUser> Execute(RequestRegisterUser request)
 	{
-		// TODO: Validar Requisição 
+		await Validate(request);
 
 		// TODO: Usar AutoMapper para Converter de DTO para Entidade 
 
@@ -34,5 +34,19 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 		{
 			Name = user.Name,
 		};
+	}
+	
+	private async Task Validate(RequestRegisterUser request)
+	{
+		var validator = new RegisterUserValidator();
+
+		var result = await validator.ValidateAsync(request);
+
+		if(!result.IsValid)
+		{
+			var errorMessages = result.Errors.Select(error => error.ErrorMessage).ToList();
+
+			throw new Exception();
+		}
 	}
 }
