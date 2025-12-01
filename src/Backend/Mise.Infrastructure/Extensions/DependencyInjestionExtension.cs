@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mise.Application.Services.Cryptography;
+using Mise.Domain.Repositories;
 using Mise.Domain.Repositories.User;
 using Mise.Domain.Security.Cryptography;
 using Mise.Infrastructure.DataAcess;
@@ -35,6 +36,8 @@ public static class DependencyInjectionExtension
 
     private static void AddRepositories(IServiceCollection services)
 	{
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 		services.AddScoped<IUserWriteRepository, UserRepository>();
 	}
 }

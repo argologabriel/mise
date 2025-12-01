@@ -1,6 +1,7 @@
 using AutoMapper;
 using Mise.Communication.Requests;
 using Mise.Communication.Responses;
+using Mise.Domain.Repositories;
 using Mise.Domain.Repositories.User;
 using Mise.Domain.Security.Cryptography;
 using Mise.Exceptions.ExceptionsBase;
@@ -12,12 +13,14 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 	private readonly IMapper _mapper;
 	private readonly IPasswordEncripter _passwordEncripter;
 	private readonly IUserWriteRepository _userWriteRepository;
+	private readonly IUnitOfWork _unitOfWork;
 
-	public RegisterUserUseCase(IMapper mapper, IPasswordEncripter passwordEncripter, IUserWriteRepository userWriteRepository)
+	public RegisterUserUseCase(IMapper mapper, IPasswordEncripter passwordEncripter, IUserWriteRepository userWriteRepository, IUnitOfWork unitOfWork)
 	{
 		_mapper = mapper;
 		_passwordEncripter = passwordEncripter;
 		_userWriteRepository = userWriteRepository;
+		_unitOfWork = unitOfWork;
 	} 
 
 	public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
@@ -28,6 +31,8 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 		user.Password = _passwordEncripter.Encrypt(request.Password);
 
 		await _userWriteRepository.Add(user);
+
+		await _unitOfWork.Commit();
 
 		return new ResponseRegisteredUserJson
 		{

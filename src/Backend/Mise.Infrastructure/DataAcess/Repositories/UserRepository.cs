@@ -15,6 +15,5 @@ public class UserRepository : IUserWriteRepository
 	public async Task Add(User user)
 	{
 		await _dbContext.Users.AddAsync(user);
-		await _dbContext.SaveChangesAsync();
 	}
 }
