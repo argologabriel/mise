@@ -2,6 +2,7 @@ using AutoMapper;
 using Mise.Communication.Requests;
 using Mise.Communication.Responses;
 using Mise.Domain.Repositories.User;
+using Mise.Domain.Security.Cryptography;
 using Mise.Exceptions.ExceptionsBase;
 
 namespace Mise.Application.UseCases.User.Register;
@@ -9,11 +10,13 @@ namespace Mise.Application.UseCases.User.Register;
 public class RegisterUserUseCase : IRegisterUserUseCase
 {
 	private readonly IMapper _mapper;
+	private readonly IPasswordEncripter _passwordEncripter;
 	private readonly IUserWriteRepository _userWriteRepository;
 
-	public RegisterUserUseCase(IMapper mapper, IUserWriteRepository userWriteRepository)
+	public RegisterUserUseCase(IMapper mapper, IPasswordEncripter passwordEncripter, IUserWriteRepository userWriteRepository)
 	{
 		_mapper = mapper;
+		_passwordEncripter = passwordEncripter;
 		_userWriteRepository = userWriteRepository;
 	} 
 
@@ -22,8 +25,7 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 		await Validate(request);
 
 		var user = _mapper.Map<Domain.Entities.User>(request);
-
-		// TODO: Criptografar Senha 
+		user.Password = _passwordEncripter.Encrypt(request.Password);
 
 		await _userWriteRepository.Add(user);
 
