@@ -1,5 +1,6 @@
 using FluentValidation;
 using Mise.Communication.Requests;
+using Shared.Mise.Exceptions;
 
 namespace Mise.Application.UseCases.User.Register;
 
@@ -9,20 +10,20 @@ public class RegisterUserValidator : AbstractValidator<RequestRegisterUserJson>
 	{
 		RuleFor(user => user.Name)
 			.NotEmpty()
-			.WithMessage("O nome não pode ser vazio.");
+			.WithMessage(ResourceMessagesException.NAME_EMPTY);
 
 		RuleFor(user => user.Email)
 			.NotEmpty()
-			.WithMessage("O email não pode ser vazio.")
+			.WithMessage(ResourceMessagesException.EMAIL_EMPTY)
 			.EmailAddress()
-			.WithMessage("O e-mail é inválido."); 
+			.WithMessage(ResourceMessagesException.EMAIL_INVALID); 
 
 		RuleFor(user => user.Password)
 			.NotEmpty()
-			.WithMessage("A senha não pode ser vazia.")
+			.WithMessage(ResourceMessagesException.PASSWORD_EMPTY)
 			.MinimumLength(8)
-			.WithMessage("A senha deve conter no mínimo 8 digítos")
+			.WithMessage(ResourceMessagesException.PASSWORD_MIN_LENGTH)
 			.MaximumLength(20)
-			.WithMessage("A senha deve conter no mínimo 20 digítos");
+			.WithMessage(ResourceMessagesException.PASSWORD_MAX_LENGTH);
 	}	
 }
