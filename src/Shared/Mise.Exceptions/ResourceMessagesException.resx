@@ -129,6 +129,10 @@
     <value>O email é inválido.</value>
     <comment/>
   </data>
+  <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
+    <value>E-mail já registrado na plataforma.</value>
+    <comment/>
+  </data>
   <data name="PASSWORD_EMPTY" xml:space="preserve">
     <value>A senha não pode ser vazia.</value>
     <comment/>
